@@ -1,21 +1,21 @@
 {
-  "title": "Your Blog Name",
-  "url": "https://example.com/",
-  "language": "en",
-  "description": "I am writing about my experiences as a naval navel-gazer.",
+  "title": "感覺統合評估及訓練中心",
+  "url": "https://vecc.group/",
+  "language": "zh-Hant",
+  "description": "針對懷疑或確診有讀寫障礙、注意力不足、過度活躍症、自閉症譜系、言語發展遲緩、資優、學習遲緩等的SEN 學生Special Educational Needs",
   "feed": {
-    "subtitle": "I am writing about my experiences as a naval navel-gazer.",
+    "subtitle": "針對懷疑或確診有讀寫障礙、注意力不足、過度活躍症、自閉症譜系、言語發展遲緩、資優、學習遲緩等的SEN 學生Special Educational Needs",
     "filename": "feed.xml",
     "path": "/feed/feed.xml",
-    "id": "https://example.com/"
+    "id": "https://vecc.group/"
   },
   "jsonfeed": {
     "path": "/feed/feed.json",
-    "url": "https://example.com/feed/feed.json"
+    "url": "https://vecc.group/feed/feed.json"
   },
   "author": {
-    "name": "Your Name Here",
-    "email": "youremailaddress@example.com",
-    "url": "https://example.com/about-me/"
+    "name": "Victory Kidult Academy",
+    "email": "info@vecc.group",
+    "url": "https://vecc.group/about-me/"
   }
 }
