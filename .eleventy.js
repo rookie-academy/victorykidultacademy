@@ -8,10 +8,20 @@ const pluginRss = require("@11ty/eleventy-plugin-rss");
 const pluginSyntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
 const pluginNavigation = require("@11ty/eleventy-navigation");
 
+const emojiReadTime = require("@11tyrocks/eleventy-plugin-emoji-readtime");
+
 module.exports = function(eleventyConfig) {
+  // add shortcode for emoji read time
+  eleventyConfig.addPlugin(emojiReadTime);
   // Copy the `img` and `css` folders to the output
   eleventyConfig.addPassthroughCopy("img");
   eleventyConfig.addPassthroughCopy("css");
+  eleventyConfig.addPassthroughCopy("assets");
+  eleventyConfig.addPassthroughCopy("photos");
+  eleventyConfig.addPassthroughCopy("favicon.ico");
+
+  // added short code
+  eleventyConfig.addShortcode("year", () => `${new Date().getFullYear()}`);
 
   // Add plugins
   eleventyConfig.addPlugin(pluginRss);
@@ -45,7 +55,7 @@ module.exports = function(eleventyConfig) {
   });
 
   function filterTagList(tags) {
-    return (tags || []).filter(tag => ["all", "nav", "post", "posts"].indexOf(tag) === -1);
+    return (tags || []).filter(tag => ["all", "nav", "post", "posts", "services"].indexOf(tag) === -1);
   }
 
   eleventyConfig.addFilter("filterTagList", filterTagList)

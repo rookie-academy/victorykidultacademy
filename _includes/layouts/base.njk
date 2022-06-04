@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="zh-Hant">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,42 +7,89 @@
     <meta name="description" content="{{ description or metadata.description }}">
     <meta name="generator" content="{{ eleventy.generator }}">
 
+    <meta name="robots" content="max-image-preview:large">
+    <meta property="og:url"           content="{{ site.url }}{{ page.url }}" />
+    <meta property="og:type"          content="article" />
+    <meta property="og:title"         content={{ title }} />
+    <meta property="og:description"   content={{ description }} />
+    <meta property="og:image"         content="{{ metadata.url }}{{ image }}" />
+    
     <link rel="stylesheet" href="{{ '/css/index.css' | url }}">
     <link rel="stylesheet" href="{{ '/css/prism-base16-monokai.dark.css' | url }}">
     <link rel="stylesheet" href="{{ '/css/prism-diff.css' | url }}">
+    <link rel="stylesheet" href="{{ '/css/carousel.css' | url }}">
+    <link rel="stylesheet" href="{{ '/css/buttons.css' | url }}">
     <link rel="alternate" href="{{ metadata.feed.path | url }}" type="application/atom+xml" title="{{ metadata.title }}">
     <link rel="alternate" href="{{ metadata.jsonfeed.path | url }}" type="application/json" title="{{ metadata.title }}">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
   </head>
   <body>
     <header>
-      <h1 class="home"><a href="{{ '/' | url }}">{{ metadata.title }}</a></h1>
+      
+      <h1 class="home"><a href="{{ '/' | url }}"><img src="/assets/logo.svg" alt="company logo" class="company-logo"> {{ metadata.title }}</a></h1>
 
       {#- Read more about `eleventy-navigation` at https://www.11ty.dev/docs/plugins/navigation/ #}
       <ul class="nav">
+      <img src="/assets/close.svg" alt="close nav" class="close">
       {%- for entry in collections.all | eleventyNavigation %}
         <li class="nav-item{% if entry.url == page.url %} nav-item-active{% endif %}"><a href="{{ entry.url | url }}">{{ entry.title }}</a></li>
       {%- endfor %}
       </ul>
+      <img src="/assets/open.svg" alt="open nav" class="menu">
     </header>
 
     <main{% if templateClass %} class="{{ templateClass }}"{% endif %}>
 
-      <!-- Delete this message -->
-      <div class="warning">
-        <ol>
-          <li>Edit the <code>_data/metadata.json</code> with your blog’s information.</li>
-          <li>(Optional) Edit <code>.eleventy.js</code> with your <a href="https://www.11ty.dev/docs/config/">configuration preferences</a>.</li>
-          <li>Delete this message from <code>_includes/layouts/base.njk</code>.</li>
-        </ol>
-        <p><em>This is an <a href="https://www.11ty.dev/">Eleventy project</a> created from the <a href="https://github.com/11ty/eleventy-base-blog"><code>eleventy-base-blog</code> repo</a>.</em></p>
-      </div>
-      <!-- Stop deleting -->
+
 
       {{ content | safe }}
     </main>
 
-    <footer></footer>
+    <footer>
+      <span class="copyright">版權所有 © {% year %} </span>
+      <div class="company-logo">
+          <img src="/assets/vka.png" alt="victory kidult academy" class="snippet__logo1">
+          <!--<img src="/assets/rookieacademy.png" alt="rookie academy" class="snippet__logo2">
+          <img src="/assets/catyoga.png" alt="cat yoga studio" class="snippet__logo3">-->
+      </div>
+      <p>服務團體．合作夥伴</p>
+    </footer>
 
     <!-- Current page: {{ page.url | url }} -->
+    <script>
+    
+    /* nav */
+    const menu = document.querySelector('.menu')
+    const close = document.querySelector('.close')
+    const nav = document.querySelector('.nav')
+
+    menu.addEventListener('click', () => {
+        nav.classList.add('open-nav')
+    }) 
+
+    close.addEventListener('click', () => {
+        nav.classList.remove('open-nav')
+    }) 
+
+    /* carousel */
+    const buttons = document.querySelectorAll("[data-carousel-button]")
+
+    buttons.forEach(button => {
+      button.addEventListener("click", () => {
+        const offset = button.dataset.carouselButton === "next" ? 1 : -1
+        const slides = button
+          .closest("[data-carousel]")
+          .querySelector("[data-slides]")
+
+        const activeSlide = slides.querySelector("[data-active]")
+        let newIndex = [...slides.children].indexOf(activeSlide) + offset
+        if (newIndex < 0) newIndex = slides.children.length - 1
+        if (newIndex >= slides.children.length) newIndex = 0
+
+        slides.children[newIndex].dataset.active = true
+        delete activeSlide.dataset.active
+      })
+    })
+    </script>
   </body>
 </html>

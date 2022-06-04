@@ -1,14 +1,16 @@
 ---
 layout: layouts/home.njk
 eleventyNavigation:
-  key: Home
+  key: 首頁
   order: 1
 ---
+{% include "carousel.njk" %}
+{% include "buttons.njk" %}
 {% set maxPosts = collections.posts.length | min(3) %}
-<h1>Latest {% if maxPosts == 1 %}Post{% else %}{{ maxPosts }} Posts{% endif %}</h1>
+<h1>最新 {% if maxPosts == 1 %}Post{% else %}{{ maxPosts }} 篇文章{% endif %}</h1>
 
 {% set postslist = collections.posts | head(-3) %}
 {% set postslistCounter = collections.posts | length %}
 {% include "postslist.njk" %}
 
-<p>More posts can be found in <a href="{{ '/posts/' | url }}">the archive</a>.</p>
+<p>所有文章分享在 <a href="{{ '/posts/' | url }}">資源</a>.</p>
