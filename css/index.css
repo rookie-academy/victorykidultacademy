@@ -184,7 +184,22 @@ code {
   line-height: 1.8;
   margin-bottom: 1em;
 }
+.post2list-item {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  counter-increment: start-from -1;
+  line-height: 1.8;
+}
 .postlist-item:before {
+  display: inline-block;
+  pointer-events: none;
+  content: "" counter(start-from, decimal-leading-zero) ". ";
+  line-height: 100%;
+  text-align: left;
+  grid-area: number
+}
+.post2list-item:before {
   display: inline-block;
   pointer-events: none;
   content: "" counter(start-from, decimal-leading-zero) ". ";
@@ -194,6 +209,10 @@ code {
 }
 .postlist-date,
 .postlist-item:before {
+  font-size: 0.8125em; /* 13px /16 */
+  color: var(--darkgray);
+}
+.post2list-item:before {
   font-size: 0.8125em; /* 13px /16 */
   color: var(--darkgray);
 }
@@ -258,6 +277,9 @@ a[href].post-tag:focus {
   background-color: var(--lightgray);
 }
 .postlist-item > .post-tag {
+  align-self: center;
+}
+.post2list-item > .post-tag {
   align-self: center;
 }
 

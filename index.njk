@@ -4,6 +4,11 @@ eleventyNavigation:
   key: 首頁
   order: 1
 ---
+<h1>Victory Kidult Academy 感覺統合評估及訓練中心</h1>
+<h2>本中心主要服務範疇：</h2>
+{% set postslist = collections.courses %}
+{% include "post2slist.njk" %}
+<hr>
 {% include "carousel.njk" %}
 {% include "buttons.njk" %}
 {% set maxPosts = collections.posts.length | min(3) %}
